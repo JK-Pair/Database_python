@@ -1,10 +1,10 @@
 import sqlite3
 from Profile import Profile
-conne = sqlite3.connect("Profiledata.db")
+from Profile import Activity
+pro = Activity('59340500021.db')
+conne = pro.conne()
 conne.row_factory = sqlite3.Row
 cursor = conne.cursor()
 cursor.execute("SELECT * FROM PROFILE")
-
-pro = Profile()
 roww = cursor.fetchone()
-pro.alldata(roww)
+pro.nameAct(roww)
