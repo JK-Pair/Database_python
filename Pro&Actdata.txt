@@ -24,5 +24,5 @@
 
 # cursor.execute("INSERT INTO ACTIVITY values('Thipawan', 'Receive a lot of knoledges.', 'Pair.jpg','calculas', 'Prof.Somran', '15/12/60', 'file of the Calculas','comfirm')")
 
-# cursor.execute("INSERT INTO ACTIVITY values('Panchalee', 'It's will be useful.', 'Popperzz.jpg','Digital', 'Prof.Pi', '15/12/60', 'file of the Digital','comfirm')")
+# cursor.execute("INSERT INTO ACTIVITY values('Panchalee', 'It is will be useful.', 'Popperzz.jpg','Digital', 'Prof.Pi', '15/12/60', 'file of the Digital','comfirm')")
 # conne.commit()
