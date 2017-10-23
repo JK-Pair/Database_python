@@ -12,7 +12,7 @@ class Profile:
     def name(self,row):
         print("name = ",row[1])
 
-    def data(self,row):
+    def date(self,row):
         print(" Date of birth = ",row[2])
 
     def birthplace(self,row):
