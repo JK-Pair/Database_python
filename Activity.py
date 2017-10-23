@@ -29,13 +29,3 @@ class Activity:
 
     def file(self,row):
         print("File = ",row[7])
-
-# import sqlite3
-# conne = sqlite3.connect('Activitydata.db')
-#
-# cursor = conne.cursor()
-# cursor.execute('''CREATE TABLE ACTIVITY
-#                     (ID student TEXT, Name Activity TEXT, Description TEXT,
-#                      Photo TEXT, TYPE TEXT, Advisor TEXT, Date_Activity TEXT, File TEXT)''')
-# cursor.execute("INSERT INTO ACTIVITY values('ID', 'name', 'Dese', 'Pho','type', 'Advisor', 'Data', 'file')")
-# conne.commit()

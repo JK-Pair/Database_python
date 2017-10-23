@@ -42,28 +42,3 @@ class Profile:
     def alldata(self,row):
         for item in row:
             print(item)
-
-
-# cursor = conne.cursor()
-# cursor.execute("SELECT * FROM PROFILE")
-#
-# pro = Profile()
-# roww = cursor.fetchone()
-# pro.phone(roww)
-
-# cursor.execute(''' CREATE TABLE PROFILE (ID Student TEXT, Name Student TEXT,
-#                 Date of birth TEXT, Brithplace TEXT, Nationality TEXT, Education TEXT,
-#                 Disease TEXT, Relative TEXT, Phone TEXT, Address TEXT, Email TEXT)''')
-#
-# cursor.execute("""insert into PROFILE values('59340500021', 'Thipawan', '14/02/40', 'thailand', 'thai',
-# 'Bachelor', 'None', 'single', '094-2690207', 'Bangkok', 'thipa@gmail.com')""")
-# conne.commit()
-
-# conne = sqlite3.connect("Profiledata.db")
-# conne.row_factory = sqlite3.Row
-# cursor = conne.cursor()
-# cursor.execute("SELECT * FROM PROFILE")
-#
-# pro = Profile()
-# roww = cursor.fetchone()
-# pro.phone(roww)
