@@ -1,6 +1,6 @@
-# cursor.execute(''' CREATE TABLE PROFILE (Name Student TEXT,
-#                 Date of birth TEXT, Brithplace TEXT, Nationality TEXT, Education TEXT,
-#                 Disease TEXT, Relative TEXT, Phone for Emergency TEXT, Phone of the student TEXT, Address TEXT, Email TEXT)''')
+# cursor.execute(''' CREATE TABLE PROFILE (NameStudent TEXT,
+#                 Dateofbirth TEXT, Brithplace TEXT, Nationality TEXT, Education TEXT,
+#                 Disease TEXT, Relative TEXT, PhoneforEmergency TEXT, Phonestudent TEXT, Address TEXT, Email TEXT)''')
 
 # cursor.execute("""insert into PROFILE values('Natthaphon', '27/08/40', 'thailand', 'thai',
 # 'Bachelor', 'None', 'Mother', '088-1234567', '094-1234567', 'Bangkok', 'million@gmail.com')""")
@@ -17,7 +17,7 @@
 # **********************************************************************************************************
 
 # cursor.execute('''CREATE TABLE ACTIVITY
-#                     (Name Activity TEXT, Description TEXT,
+#                     (NameActivity TEXT, Description TEXT,
 #                      Photo TEXT, TYPE TEXT, Advisor TEXT, Date_Activity TEXT, File TEXT, Confirm NULL)''')
 
 # cursor.execute("INSERT INTO ACTIVITY values('Natthaphon', 'this is so fun.', 'Mill.jpg','Dynamics', 'Prof.Ton', '14/12/60', 'file of the Dynamic','comfirm')")
