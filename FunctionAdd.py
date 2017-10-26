@@ -1,6 +1,7 @@
 from sqlalchemy import *
-from sqlalchemy.orm import relationship,sessionmaker
+from sqlalchemy.orm import *
 from sqlalchemy.ext.declarative import declarative_base
+
 db = create_engine('sqlite:///Database.sqlite')
 Base = declarative_base()
 
@@ -36,16 +37,16 @@ class Activity(Base):
     profile_id = Column(Integer, ForeignKey("Profile.id"))
 
 
-
-session = sessionmaker()
-session.configure(bind=db)
+Session = sessionmaker(bind=db)
+session = Session()
 Base.metadata.create_all(db)
-s = session()
-sth = Profile(Name = "something")
-s.add(sth)
-s.commit()
 
-
+# # sth = Profile(id_student = "59340500021",Name = "Thipawan",Dateofbirth = "14/02/40",Birthplace = "Hospital",Nationality = "Thai",Education = "Bungkan",Disease = "None",Relative = "dad",PhoneforEmergency = "0967876",Phonestudent = "096235333" ,Address = "Buayai",Email = "pair@gmail.com")
+# session.add(sth)
+# session.commit()
+query = session.query(Profile)
+for user in query.filter_by(Name='Thipawan'):
+    print(user.Email)
 
 
 
