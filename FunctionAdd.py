@@ -9,6 +9,7 @@ class Profile(Base):
     __tablename__ = 'Profile'
     id_student = Column(Integer,primary_key=True)
     Name = Column(String)
+    Fullname = Column(String)
     Dateofbirth = Column(String)
     Birthplace = Column(String)
     Nationality = Column(String)
@@ -35,86 +36,238 @@ class Activity(Base):
     Confirm = Column(String)
     # profile_id = Column(Integer, ForeignKey("Profile.id"))
 
-# Session = sessionmaker(bind=db)
-# session = Session()
-# Base.metadata.create_all(db)
-# query = session.query(Profile)
-
-# sth = Profile(id_student = 59340500035,Name = "Panchalee",Dateofbirth = "12/21/41",Birthplace = "Hospital",Nationality = "Thai",Education = "Surin",Disease = "None",Relative = "mom",PhoneforEmergency = "3434343434",Phonestudent = "66666666" ,Address = "Surin",Email = "pop@gmail.com")
-# session.add(sth)
-# session.commit()
-
-# query = session.query(Profile)
-# for user in query.filter_by(Name='Panchalee'):
-#     print(user.Email)
-
-# addData = session.query(Profile).filter_by(id_student=59340500035).one()
-# addData.Name = 'Panchalee'
-# session.add(addData)
-# session.commit()
-
 Session = sessionmaker(bind=db)
 session = Session()
 Base.metadata.create_all(db)
 query = session.query(Profile)
-class Method:
+Acque = session.query(Activity)
 
+class Method:
 
     def __init__(self,data):
 
         self.data = data
 
-    def cp_name(self):
+    def name(self):
         for user in query.filter_by(id_student="{}".format(self.data)):
             print(user.Name)
             return user.Name
 
-    def cp_date(self):
+    def date(self):
         for user in query.filter_by(id_student="{}".format(self.data)):
             print(user.Dateofbirth)
             return user.Dateofbirth
 
-    def cp_birth(self):
+    def birth(self):
         for user in query.filter_by(id_student="{}".format(self.data)):
             print(user.Birthplace)
             return user.Birthplace
 
-    def cp_nation(self):
+    def nation(self):
         for user in query.filter_by(id_student="{}".format(self.data)):
             print(user.Nationality)
             return user.Nationality
 
-    def cp_edu(self):
+    def education(self):
         for user in query.filter_by(id_student="{}".format(self.data)):
             print(user.Education)
             return user.Education
 
-    def cp_disease(self):
+    def disease(self):
         for user in query.filter_by(id_student="{}".format(self.data)):
             print(user.Disease)
             return user.Disease
 
-    def cp_relative(self):
+    def relative(self):
         for user in query.filter_by(id_student="{}".format(self.data)):
             print(user.Relative)
             return  user.Relative
 
-    def cp_PhforEmer(self):
+    def PhoneEmer(self):
         for user in query.filter_by(id_student="{}".format(self.data)):
             print(user.PhoneforEmergency)
             return user.PhoneforEmergency
 
-    def cp_Phstu(self):
+    def Phonestu(self):
         for user in query.filter_by(id_student="{}".format(self.data)):
             print(user.Phonestudent)
             return user.Phonestudent
 
-    def cp_address(self):
-        for user in query.filter_by(id_student="{}".format(self.data)):
+    def address(self):
+         for user in query.filter_by(id_student="{}".format(self.data)):
             print(user.Address)
             return user.Address
 
-    def cp_email(self):
+    def email(self):
         for user in query.filter_by(id_student = "{}".format(self.data)):
             print(user.Email)
             return user.Email
+
+
+    def Act_name(self):
+        for user in Acque.filter_by(id_student = "{}".format(self.data)):
+            print(user.NameActivity)
+            return user.NameActivity
+
+    def Act_des(self):
+        for user in Acque.filter_by(id_student = "{}".format(self.data)):
+            print(user.Description)
+            return user.Description
+
+    def Act_photo(self):
+        for user in Acque.filter_by(id_student = "{}".format(self.data)):
+            print(user.Photo)
+            return user.Photo
+
+    def Act_type(self):
+        for user in Acque.filter_by(id_student = "{}".format(self.data)):
+            print(user.Type)
+            return user.Type
+
+    def Act_advisor(self):
+        for user in Acque.filter_by(id_student = "{}".format(self.data)):
+            print(user.Advisor)
+            return user.Advisor
+
+    def Act_Date(self):
+        for user in Acque.filter_by(id_student = "{}".format(self.data)):
+            print(user.Date_Activity)
+            return user.Date_Activity
+
+    def Act_file(self):
+        for user in Acque.filter_by(id_student = "{}".format(self.data)):
+            print(user.File)
+            return user.File
+
+    def Act_confirm(self):
+        for user in Acque.filter_by(id_student = "{}".format(self.data)):
+            print(user.Confirm)
+            return user.Confirm
+
+class Add_Method:
+
+    def __init__(self,id):
+        self.id = id
+
+    def id_stu(self,method):
+        sth = method(id_student = "{}".format(self.id))
+        session.add(sth)
+        session.commit()
+
+    def name(self,data):
+        addData = session.query(Profile).filter_by(id_student="{}".format(self.id)).one()
+        addData.Name = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
+    def fullname(self,data):
+        addData = session.query(Profile).filter_by(id_student="{}".format(self.id)).one()
+        addData.Fullname = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
+    def date(self,data):
+        addData = session.query(Profile).filter_by(id_student="{}".format(self.id)).one()
+        addData.Dateofbirth = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
+    def nation(self,data):
+        addData = session.query(Profile).filter_by(id_student="{}".format(self.id)).one()
+        addData.Nationality = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
+    def education(self,data):
+        addData = session.query(Profile).filter_by(id_student="{}".format(self.id)).one()
+        addData.Education = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
+    def disease(self,data):
+        addData = session.query(Profile).filter_by(id_student="{}".format(self.id)).one()
+        addData.Disease = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
+    def relative(self,data):
+        addData = session.query(Profile).filter_by(id_student="{}".format(self.id)).one()
+        addData.Relative = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
+    def phoneEmer(self,data):
+        addData = session.query(Profile).filter_by(id_student="{}".format(self.id)).one()
+        addData.PhoneforEmergency = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
+    def phonestu(self,data):
+        addData = session.query(Profile).filter_by(id_student="{}".format(self.id)).one()
+        addData.Phonestudent = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
+    def address(self,data):
+        addData = session.query(Profile).filter_by(id_student="{}".format(self.id)).one()
+        addData.Address = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
+    def email(self,data):
+        addData = session.query(Profile).filter_by(id_student="{}".format(self.id)).one()
+        addData.EmailDateofbirth = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
+    def nameAct(self,data):
+        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
+        addData.NameActivity = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
+    def descrip(self,data):
+        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
+        addData.Description = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
+    def photo(self,data):
+        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
+        addData.Photo = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
+    def type(self,data):
+        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
+        addData.Type = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
+    def advisor(self,data):
+        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
+        addData.Advisor = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
+    def dateAct(self,data):
+        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
+        addData.Date_Activity = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
+    def file(self,data):
+        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
+        addData.File = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
+    def confirm(self,data):
+        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
+        addData.Confirm = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
+
+add = Add_Method(59340500008)
+add.nameAct("Chakputtana")
