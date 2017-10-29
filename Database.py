@@ -5,28 +5,33 @@ from sqlalchemy.ext.declarative import declarative_base
 db = create_engine('sqlite:///Database.db')
 Base = declarative_base()
 
+
 class Profile(Base):
     __tablename__ = 'Profile'
-    id_student = Column(Integer,primary_key=True)
-    Name = Column(String)
-    Fullname = Column(String)
+    id_student = Column(Integer,primary_key=True,nullable=False)
+    Name = Column(String,primary_key=True,nullable=False)
+    Surname = Column(String,nullable=False)
+    Sex = Column(String,nullable=False)
+    Year = Column(Integer)
     Dateofbirth = Column(String)
     Birthplace = Column(String)
     Nationality = Column(String)
     Education = Column(String)
-    Disease = Column(String)
     Relative = Column(String)
     PhoneforEmergency = Column(String)
     Phonestudent = Column(String)
     Address = Column(String)
     Email = Column(String)
-    # activity = relationship("Activity")
 
+class Disease(Base):
+    __tablename__ = 'Disease'
+    id_student = Column(Integer,primary_key=True)
+    Disease = Column(String,primary_key=True)
 
 class Activity(Base):
     __tablename__ = 'Activity'
     id_student = Column(Integer,primary_key=True)
-    NameActivity = Column(String)
+    NameActivity = Column(String,primary_key=True)
     Description = Column(String)
     Photo = Column(String)#change next time
     Type = Column(String)
@@ -34,115 +39,117 @@ class Activity(Base):
     Date_Activity = Column(String)
     File = Column(String)#change next time
     Confirm = Column(String)
-    # profile_id = Column(Integer, ForeignKey("Profile.id"))
+
+
+Session = sessionmaker(bind=db)
+session = Session()
+query = session.query(Disease)
 
 Session = sessionmaker(bind=db)
 session = Session()
 Base.metadata.create_all(db)
 query = session.query(Profile)
 Acque = session.query(Activity)
+disquery = session.query(Disease)
 
-class Method:
+class return_Method:
 
     def __init__(self,data):
-
         self.data = data
 
     def name(self):
         for user in query.filter_by(id_student="{}".format(self.data)):
-            print(user.Name)
             return user.Name
 
     def date(self):
         for user in query.filter_by(id_student="{}".format(self.data)):
-            print(user.Dateofbirth)
             return user.Dateofbirth
 
     def birth(self):
         for user in query.filter_by(id_student="{}".format(self.data)):
-            print(user.Birthplace)
             return user.Birthplace
 
     def nation(self):
         for user in query.filter_by(id_student="{}".format(self.data)):
-            print(user.Nationality)
             return user.Nationality
 
     def education(self):
         for user in query.filter_by(id_student="{}".format(self.data)):
-            print(user.Education)
             return user.Education
 
     def disease(self):
-        for user in query.filter_by(id_student="{}".format(self.data)):
-            print(user.Disease)
-            return user.Disease
+        box = []
+        for user in disquery.filter_by(id_student = "{}".format(self.data)):
+            box.append(user.Disease)
+        return box
 
     def relative(self):
         for user in query.filter_by(id_student="{}".format(self.data)):
-            print(user.Relative)
             return  user.Relative
 
     def PhoneEmer(self):
         for user in query.filter_by(id_student="{}".format(self.data)):
-            print(user.PhoneforEmergency)
             return user.PhoneforEmergency
 
     def Phonestu(self):
         for user in query.filter_by(id_student="{}".format(self.data)):
-            print(user.Phonestudent)
             return user.Phonestudent
 
     def address(self):
-         for user in query.filter_by(id_student="{}".format(self.data)):
-            print(user.Address)
+        for user in query.filter_by(id_student="{}".format(self.data)):
             return user.Address
 
     def email(self):
         for user in query.filter_by(id_student = "{}".format(self.data)):
-            print(user.Email)
             return user.Email
 
-
     def Act_name(self):
+        box = []
         for user in Acque.filter_by(id_student = "{}".format(self.data)):
-            print(user.NameActivity)
-            return user.NameActivity
+            box.append(user.NameActivity)
+        return box
 
     def Act_des(self):
+        box = []
         for user in Acque.filter_by(id_student = "{}".format(self.data)):
-            print(user.Description)
-            return user.Description
+            box.append(user.Description)
+        return box
 
     def Act_photo(self):
+        box = []
         for user in Acque.filter_by(id_student = "{}".format(self.data)):
-            print(user.Photo)
-            return user.Photo
+            box.append(user.Photo)
+        return box
 
     def Act_type(self):
+        box = []
         for user in Acque.filter_by(id_student = "{}".format(self.data)):
-            print(user.Type)
-            return user.Type
+            box.append(user.Type)
+        return box
 
     def Act_advisor(self):
+        box = []
         for user in Acque.filter_by(id_student = "{}".format(self.data)):
-            print(user.Advisor)
-            return user.Advisor
+            box.append(user.Advisor)
+        return box
 
     def Act_Date(self):
+        box = []
         for user in Acque.filter_by(id_student = "{}".format(self.data)):
-            print(user.Date_Activity)
-            return user.Date_Activity
+            box.append(user.Date_Activity)
+        return box
 
     def Act_file(self):
+        box = []
         for user in Acque.filter_by(id_student = "{}".format(self.data)):
-            print(user.File)
-            return user.File
+            box.append(user.File)
+        return box
 
     def Act_confirm(self):
+        box = []
         for user in Acque.filter_by(id_student = "{}".format(self.data)):
-            print(user.Confirm)
-            return user.Confirm
+            box.append(user.Confirm)
+        return box
 
 class Add_Method:
 
@@ -185,9 +192,8 @@ class Add_Method:
         session.commit()
 
     def disease(self,data):
-        addData = session.query(Profile).filter_by(id_student="{}".format(self.id)).one()
-        addData.Disease = "{}".format(data)
-        session.add(addData)
+        sth = Disease(id_student = "{}".format(self.id),Disease = "{}".format(data))
+        session.add(sth)
         session.commit()
 
     def relative(self,data):
@@ -221,53 +227,59 @@ class Add_Method:
         session.commit()
 
     def nameAct(self,data):
-        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
-        addData.NameActivity = "{}".format(data)
-        session.add(addData)
-        session.commit()
+        sth = Activity(id_student = "{}".format(self.id),NameActivity = "{}".format(data))
+        session.add(sth)
+
 
     def descrip(self,data):
-        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
-        addData.Description = "{}".format(data)
-        session.add(addData)
-        session.commit()
+        sth = Activity(id_student = "{}".format(self.id),Description = "{}".format(data))
+        session.add(sth)
 
     def photo(self,data):
-        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
-        addData.Photo = "{}".format(data)
-        session.add(addData)
-        session.commit()
+        sth = Activity(id_student = "{}".format(self.id), Photo = "{}".format(data))
+        session.add(sth)
 
     def type(self,data):
-        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
-        addData.Type = "{}".format(data)
-        session.add(addData)
-        session.commit()
+        sth = Activity(id_student = "{}".format(self.id), Type = "{}".format(data))
+        session.add(sth)
 
     def advisor(self,data):
-        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
-        addData.Advisor = "{}".format(data)
-        session.add(addData)
-        session.commit()
+        sth = Activity(id_student = "{}".format(self.id), Advisor = "{}".format(data))
+        session.add(sth)
 
     def dateAct(self,data):
-        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
-        addData.Date_Activity = "{}".format(data)
-        session.add(addData)
-        session.commit()
+        sth = Activity(id_student = "{}".format(self.id), Date_Activity = "{}".format(data))
+        session.add(sth)
 
     def file(self,data):
-        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
-        addData.File = "{}".format(data)
-        session.add(addData)
-        session.commit()
+        sth = Activity(id_student = "{}".format(self.id), File = "{}".format(data))
+        session.add(sth)
 
     def confirm(self,data):
-        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
-        addData.Confirm = "{}".format(data)
-        session.add(addData)
-        session.commit()
+        sth = Activity(id_student = "{}".format(self.id), Confirm = "{}".format(data))
+        session.add(sth)
 
+    def commit(self):
+        return session.commit()
 
-add = Add_Method(59340500008)
-add.nameAct("Chakputtana")
+    def Dicdisease(self,Disease = None):
+        dataAct = []
+        for item in Disease:
+            dicAct = {'id_student' : self.id, 'Disease ' : item}
+            dataAct.append(dicAct)
+        return dataAct
+
+    def DicAct(self,NameAct = None, Descrip = None, Photo = None, Type = None, Advisor = None, Date = None, File = None, Confirm = None ):
+        dataAct = []
+        for item in range(len(NameAct)):
+            dicAct = {'Name Activity' : NameAct[item], 'Description' : Descrip[item], 'Photo' : Photo[item], 'Type' : Type[item], 'Advisor' : Advisor[item], 'Date_Activity' : Date[item], 'File' : File[item], 'Confirm' : Confirm[item]}
+            dataAct.append(dicAct)
+        return dataAct
+
+# add = Add_Method(59340500017)
+# re = return_Method(59340500017)
+# print(add.Dicdisease(re.disease()))
+
+re = return_Method(59340500035)
+add = Add_Method(59340500035)
+print(add.DicAct(re.Act_name(), re.Act_des(), re.Act_photo(), re.Act_type(), re.Act_advisor(), re.Act_Date(), re.Act_file(), re.Act_confirm()))
