@@ -1,0 +1,127 @@
+sth = Profile(id_student = 59340500035,Name = "Panchalee",Fullname  = "Sookprao", Dateofbirth = "12/21/41",Birthplace = "Hospital",Nationality = "Thai",Education = "Surin",Disease = "None",Relative = "mom",PhoneforEmergency = "3434343434",Phonestudent = "66666666" ,Address = "Surin",Email = "pop@gmail.com")
+sth = Profile(id_student = 59340500021,Name = "Thipawan",Fullname  = "Pairam", Dateofbirth = "14/09/40",Birthplace = "Hospital1",Nationality = "Thai",Education = "Bungkan",Disease = "None",Relative = "Dad",PhoneforEmergency = "0941234567",Phonestudent = "0867654321" ,Address = "Bungkan",Email = "pair@gmail.com")
+sth = Profile(id_student = 59340500017,Name = "Natthaphon",Fullname  = "Sudadech", Dateofbirth = "05/03/39",Birthplace = "Hospital2",Nationality = "Thai",Education = "Bungkan",Disease = "None",Relative = "Mom",PhoneforEmergency = "087654321",Phonestudent = "0865432111" ,Address = "Bungkan",Email = "mill@gmail.com")
+
+
+sth = Profile(id_student = 59340500035,Name = "Panchalee",Surname  = "Sookprao", Sex = "Miss", Year = 1, Dateofbirth = "12/21/41",Birthplace = "Hospital",Nationality = "Thai",Education = "Surin",Relative = "mom",PhoneforEmergency = "3434343434",Phonestudent = "66666666" ,Address = "Surin",Email = "pop@gmail.com")
+sth1 = Profile(id_student = 59340500021,Name = "Thipawan",Surname  = "Pairam", Sex = "Miss", Year =1 ,Dateofbirth = "14/09/40",Birthplace = "Hospital1",Nationality = "Thai",Education = "Bungkan",Relative = "Dad",PhoneforEmergency = "0941234567",Phonestudent = "0867654321" ,Address = "Bungkan",Email = "pair@gmail.com")
+sth2 = Profile(id_student = 59340500017,Name = "Natthaphon",Surname  = "Sudadech", Sex = "Mr", Year =1, Dateofbirth = "05/03/39",Birthplace = "Hospital2",Nationality = "Thai",Education = "Bungkan",Relative = "Mom",PhoneforEmergency = "087654321",Phonestudent = "0865432111" ,Address = "Bungkan",Email = "mill@gmail.com")
+
+sth = Activity(id_student = 59340500017,NameActivity = "Natthaphon",Description = "this is so fun.",Photo = "Mill.jpg",Type = "Dynamics",Advisor = "Prof.Ton",Date_Activity = "14/12/60",File = "file of the Dynamic",Confirm = "Not Confirm yet")
+sth = Activity(id_student = 59340500021,NameActivity = "Thipawan",Description = "Receive a lot of knowledges.",Photo = "Pair.jpg",Type = "Calculas",Advisor = "Prof.Somran",Date_Activity = "15/12/61",File = "file of the Calculas",Confirm = "confirm")
+sth = Activity(id_student = 59340500035,NameActivity = "Panchalee",Description = "It is will be useful.",Photo = "Popperzz.jpg",Type = "Digital",Advisor = "Prof.Pi",Date_Activity = "15/12/60",File = "file of the Digital",Confirm = "Not Confirm yet")
+sth = Activity(id_student = 59340500035,NameActivity = "Table tennnis.",Description = "Table tennis is good.",Photo = "Popperzztennis.jpg",Type = "Sport",Advisor = "Prof.__",Date_Activity = "29/05/60",File = "file of the table tennis",Confirm = "Confirm")
+
+sth = Disease(id_student = 59340500017,Disease = "gout")
+sth = Disease(id_student = 59340500017,Disease = "hemorrhoids")
+sth = Disease(id_student = 59340500017,Disease = "pneumonia")
+
+
+sth = Disease(id_student = 59340500035,Disease = "diarrhea")
+sth1 = Disease(id_student = 59340500035,Disease = "enteritis")
+
+sth = Disease(id_student = 59340500021,Disease = "heart disease")
+sth1 = Disease(id_student = 59340500021,Disease = "measles")
+
+ session.add(sth) #add sth into database.
+ session.commit() #commit data that increase.
+
+
+#Add data
+addData = session.query(Profile).filter_by(id_student=59340500035).one()
+addData.Name = 'Panchalee'
+session.add(addData)
+session.commit()
+
+#print data
+query = session.query(Profile)
+for user in query.filter_by(Name='Panchalee'):
+    print(user.Email)
+
+#delete data
+spinach = session.query(Profile).filter_by(id_student = 59340500026).one()
+session.delete(spinach)
+session.commit()
+
+Session = sessionmaker(bind=db)
+session = Session()
+Base.metadata.create_all(db) #all data that command add into database
+query = session.query(Profile) #choose data in Profile= for do something
+Acque = session.query(Activity)
+
+# def name(data):
+#     box = []
+#     for user in query.filter_by(id_student = "{}".format(data)):
+#         box.append(user.Disease)
+#     x = ",".join(box)
+#     return x
+#
+# x = name(59340500035)
+# print(x)
+
+
+
+New-----------------
+
+
+
+
+# Add data
+# x = Add_Method(59340500021)
+# x.disease("tonsillitis")
+
+# box = []
+# for user in disquery.filter_by(id_student = "{}".format(self.data)):
+#     box.append(user.Disease)
+# x = ",".join(box)
+# return x
+
+def DicAct(id_student = None):
+    box = []
+    for i in id_student:
+        box.append(i)
+    x = ",".join(box)
+    dicAct = {'id_student' : id_student, 'Disease ' : Disease}
+     dataAct = []
+     dicAct = {'id_student' : id_student, 'Disease ' : Disease}
+     dataAct.append(dicAct)
+     return dataAct
+
+*********FOR TEST Diseaese**************
+re = return_Method(59340500021)
+print(re.disease())
+
+**************************
+def DicAct(NameAct = None, Descrip = None, Photo = None, Type = None, Advisor = None, Date = None, File = None, Confirm = None ):
+        dataAct = []
+        dicAct = {'Name Activity' : NameAct, 'Description' : Descrip, 'Photo' : Photo, 'Type' : Type, 'Advisor' : Advisor, 'Date_Activity' : Date, 'File' : File, 'Confirm' : Confirm}
+        dataAct.append(dicAct)
+        return dataAct
+
+_____TEST_DIC_____
+def DicAct(id_student = None, Disease = None):
+    dataAct = []
+    for item in Disease:
+        dicAct = {'id_student' : id_student, 'Disease ' : item}
+        dataAct.append(dicAct)
+    print(dataAct)
+DicAct(59340500021,re.disease)
+
+
+class Dog:
+    def __init__(self,name,age):
+        self.name = name
+        self.age = age
+
+    def say_hello(self):
+        print 'Hello, my name is', self.name
+
+    def say_age(self):
+        print 'I am', self.age, 'years old'
+
+>>> d = Dog('dang',3)
+>>> d.say_hello()
+Hello, my name is dang
+>>> e = Dog('dum',4)
+>>> e.say_age()
+I am 4 years old
