@@ -55,6 +55,11 @@ class return_Method:
     def __init__(self,data):
         self.data = data
 
+    def id_stu(self):
+        sth = Profile(id_student = "{}".format(self.id))
+        session.add(sth)
+        session.commit()
+
     def name(self):
         for user in query.filter_by(id_student="{}".format(self.data)):
             return user.Name
@@ -177,6 +182,12 @@ class Add_Method:
         session.add(addData)
         session.commit()
 
+    def birth(self,data):
+        addData = session.query(Profile).filter_by(id_student="{}".format(self.id)).one()
+        addData.Birthplace = "{}".format(data)
+        session.add(addData)
+        session.commit()
+
     def nation(self,data):
         addData = session.query(Profile).filter_by(id_student="{}".format(self.id)).one()
         addData.Nationality = "{}".format(data)
@@ -220,56 +231,7 @@ class Add_Method:
 
     def email(self,data):
         addData = session.query(Profile).filter_by(id_student="{}".format(self.id)).one()
-        addData.EmailDateofbirth = "{}".format(data)
-        session.add(addData)
-        session.commit()
-
-    def nameAct(self,data):
-        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
-        addData.NameActivity = "{}".format(data)
-        session.add(addData)
-        session.commit()
-
-
-    def descrip(self,data):
-        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
-        addData.Description = "{}".format(data)
-        session.add(addData)
-        session.commit()
-
-    def photo(self,data):
-        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
-        addData.Photo = "{}".format(data)
-        session.add(addData)
-        session.commit()
-
-    def type(self,data):
-        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
-        addData.Type = "{}".format(data)
-        session.add(addData)
-        session.commit()
-
-    def advisor(self,data):
-        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
-        addData.Advisor = "{}".format(data)
-        session.add(addData)
-        session.commit()
-
-    def dateAct(self,data):
-        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
-        addData.Date_Activity = "{}".format(data)
-        session.add(addData)
-        session.commit()
-
-    def file(self,data):
-        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
-        addData.File = "{}".format(data)
-        session.add(addData)
-        session.commit()
-
-    def confirm(self,data):
-        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
-        addData.Confirm = "{}".format(data)
+        addData.Email = "{}".format(data)
         session.add(addData)
         session.commit()
 
@@ -286,13 +248,16 @@ class Add_Method:
             dicAct = {'Name Activity' : NameAct[item], 'Description' : Descrip[item], 'Photo' : Photo[item], 'Type' : Type[item], 'Advisor' : Advisor[item], 'Date_Activity' : Date[item], 'File' : File[item], 'Confirm' : Confirm[item]}
             dataAct.append(dicAct)
         return dataAct
-#
-add = Add_Method(59340500017)
-# # re = return_Method(59340500017)
-# # print(add.Dicdisease(re.disease()))
-#
-# # re = return_Method(59340500035)
-# add = Add_Method(59340500035)
-# # print(add.DicAct(re.Act_name(), re.Act_des(), re.Act_photo(), re.Act_type(), re.Act_advisor(), re.Act_Date(), re.Act_file(), re.Act_confirm()))
-#
-add.id_stu(Activity,59340500017)
+
+    def AddAct(self,nameAct = None, descrip = None, photo = None, type = None, advisor = None, date = None, file = None, confirm = None):
+
+        sth = Activity(id_student = "{}".format(self.id),NameActivity = "{}".format(nameAct), Description  = "{}".format(descrip),Photo = "{}".format(photo),
+                       Type = "{}".format(type), Advisor = "{}".format(advisor),Date_Activity = "{}".format(date),
+                       File = "{}".format(file), Confirm = "{}".format(confirm))
+        session.add(sth)
+        session.commit()
+
+
+# _________TEST_____
+# add = Add_Method(59340500021)
+# add.AddAct("name","des","photo","type","advisor",None,"file","confirm")
