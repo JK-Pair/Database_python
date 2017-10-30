@@ -170,9 +170,9 @@ class Add_Method:
         session.add(addData)
         session.commit()
 
-    def fullname(self,data):
+    def Surname(self,data):
         addData = session.query(Profile).filter_by(id_student="{}".format(self.id)).one()
-        addData.Fullname = "{}".format(data)
+        addData.Surname = "{}".format(data)
         session.add(addData)
         session.commit()
 
