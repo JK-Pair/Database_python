@@ -2,14 +2,13 @@ from sqlalchemy import *
 from sqlalchemy.orm import *
 from sqlalchemy.ext.declarative import declarative_base
 
-db = create_engine('sqlite:///Database.db')
+db = create_engine('sqlite:///DatabaseOne.db')
 Base = declarative_base()
-
 
 class Profile(Base):
     __tablename__ = 'Profile'
     id_student = Column(Integer,primary_key=True,nullable=False)
-    Name = Column(String,primary_key=True,nullable=False)
+    Name = Column(String,nullable=False)
     Surname = Column(String,nullable=False)
     Sex = Column(String,nullable=False)
     Year = Column(Integer)
@@ -41,13 +40,12 @@ class Activity(Base):
     Confirm = Column(String)
 
 
-Session = sessionmaker(bind=db)
-session = Session()
-query = session.query(Disease)
 
 Session = sessionmaker(bind=db)
 session = Session()
-Base.metadata.create_all(db)
+# Base.metadata.create_all(db)
+
+query = session.query(Disease)
 query = session.query(Profile)
 Acque = session.query(Activity)
 disquery = session.query(Disease)
@@ -227,40 +225,53 @@ class Add_Method:
         session.commit()
 
     def nameAct(self,data):
-        sth = Activity(id_student = "{}".format(self.id),NameActivity = "{}".format(data))
-        session.add(sth)
+        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
+        addData.NameActivity = "{}".format(data)
+        session.add(addData)
+        session.commit()
 
 
     def descrip(self,data):
-        sth = Activity(id_student = "{}".format(self.id),Description = "{}".format(data))
-        session.add(sth)
+        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
+        addData.Description = "{}".format(data)
+        session.add(addData)
+        session.commit()
 
     def photo(self,data):
-        sth = Activity(id_student = "{}".format(self.id), Photo = "{}".format(data))
-        session.add(sth)
+        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
+        addData.Photo = "{}".format(data)
+        session.add(addData)
+        session.commit()
 
     def type(self,data):
-        sth = Activity(id_student = "{}".format(self.id), Type = "{}".format(data))
-        session.add(sth)
+        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
+        addData.Type = "{}".format(data)
+        session.add(addData)
+        session.commit()
 
     def advisor(self,data):
-        sth = Activity(id_student = "{}".format(self.id), Advisor = "{}".format(data))
-        session.add(sth)
+        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
+        addData.Advisor = "{}".format(data)
+        session.add(addData)
+        session.commit()
 
     def dateAct(self,data):
-        sth = Activity(id_student = "{}".format(self.id), Date_Activity = "{}".format(data))
-        session.add(sth)
+        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
+        addData.Date_Activity = "{}".format(data)
+        session.add(addData)
+        session.commit()
 
     def file(self,data):
-        sth = Activity(id_student = "{}".format(self.id), File = "{}".format(data))
-        session.add(sth)
+        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
+        addData.File = "{}".format(data)
+        session.add(addData)
+        session.commit()
 
     def confirm(self,data):
-        sth = Activity(id_student = "{}".format(self.id), Confirm = "{}".format(data))
-        session.add(sth)
-
-    def commit(self):
-        return session.commit()
+        addData = session.query(Activity).filter_by(id_student="{}".format(self.id)).one()
+        addData.Confirm = "{}".format(data)
+        session.add(addData)
+        session.commit()
 
     def Dicdisease(self,Disease = None):
         dataAct = []
@@ -275,11 +286,13 @@ class Add_Method:
             dicAct = {'Name Activity' : NameAct[item], 'Description' : Descrip[item], 'Photo' : Photo[item], 'Type' : Type[item], 'Advisor' : Advisor[item], 'Date_Activity' : Date[item], 'File' : File[item], 'Confirm' : Confirm[item]}
             dataAct.append(dicAct)
         return dataAct
-
-# add = Add_Method(59340500017)
-# re = return_Method(59340500017)
-# print(add.Dicdisease(re.disease()))
-
-re = return_Method(59340500035)
-add = Add_Method(59340500035)
-print(add.DicAct(re.Act_name(), re.Act_des(), re.Act_photo(), re.Act_type(), re.Act_advisor(), re.Act_Date(), re.Act_file(), re.Act_confirm()))
+#
+add = Add_Method(59340500017)
+# # re = return_Method(59340500017)
+# # print(add.Dicdisease(re.disease()))
+#
+# # re = return_Method(59340500035)
+# add = Add_Method(59340500035)
+# # print(add.DicAct(re.Act_name(), re.Act_des(), re.Act_photo(), re.Act_type(), re.Act_advisor(), re.Act_Date(), re.Act_file(), re.Act_confirm()))
+#
+add.id_stu(Activity,59340500017)
